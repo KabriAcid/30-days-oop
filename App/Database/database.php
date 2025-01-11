@@ -2,11 +2,14 @@
 
 namespace App\Database;
 
-require __DIR__ . '../vendor/autoload.php';
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '../');
+require __DIR__ . '/../../vendor/autoload.php';
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
-class Database {
+class Database
+{
     private $host;
     private $user;
     private $password;
@@ -20,12 +23,12 @@ class Database {
         $this->database = $_ENV['DATABASE_NAME'];
     }
 
-    public function connect(){
-        $connection = new \mysqli($this->host, $this->user, $this->password, $this->database);
-        if($connection->connect_error){
-            die("Connection failed: " . $connection->connect_error);
+    public function connect()
+    {
+        $conn = new \mysqli($this->host, $this->user, $this->password, $this->database);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-        return $connection;
+        return $conn;
     }
 }
-
