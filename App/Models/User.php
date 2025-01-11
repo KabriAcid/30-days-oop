@@ -1,10 +1,16 @@
 <?php
 
+namespace App\Models;
+
+use App\Database\Database;
+
+
 require __DIR__ . '/../app/database/database.php';
 
-class User {
+class User
+{
     public $table;
-    
+
     public function __construct($table)
     {
         $this->table = $table;
@@ -27,7 +33,8 @@ class User {
         $conn->close();
         return $result;
     }
-    public function update($id){
+    public function update($id)
+    {
         $db = new Database;
         $conn = $db->connect();
         $sql = "UPDATE $this->table SET name = 'John Doe' WHERE id = $id";
@@ -35,7 +42,8 @@ class User {
         $conn->close();
         return $result;
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $db = new Database;
         $conn = $db->connect();
         $sql = "DELETE FROM $this->table WHERE id = $id";
@@ -43,5 +51,4 @@ class User {
         $conn->close();
         return $result;
     }
-
 }

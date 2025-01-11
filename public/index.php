@@ -1,12 +1,8 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php'; // Ensure the autoloader is included
 
-require __DIR__ . '/../app/database/database.php';
+use App\Database\Database;
 
-$db = new Database;
+$db = new Database();
 
-$db->connect();
-
-
-
-
-
+echo $db->connect() ? "true" : "false";
