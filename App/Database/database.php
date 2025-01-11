@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Database;
-
 require __DIR__ . '/../../vendor/autoload.php';
 use Dotenv\Dotenv;
 

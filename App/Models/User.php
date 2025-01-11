@@ -1,19 +1,47 @@
 <?php
-namespace App\Models;
+
+require __DIR__ . '/../app/database/database.php';
 
 class User {
-    public $id;
-    public $name;
-    public $email;
-
-    public function __construct($id, $name, $email)
+    public $table;
+    
+    public function __construct($table)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->$email = $email;
+        $this->table = $table;
+    }
+    public function retrieve()
+    {
+        $db = new Database;
+        $conn = $db->connect();
+        $sql = "SELECT * FROM $this->table";
+        $result = $conn->query($sql);
+        $conn->close();
+        return $result;
+    }
+    public function insert($name, $email)
+    {
+        $db = new Database;
+        $conn = $db->connect();
+        $sql = "INSERT INTO $this->table (name, email) VALUES ('$name', '$email')";
+        $result = $conn->query($sql);
+        $conn->close();
+        return $result;
+    }
+    public function update($id){
+        $db = new Database;
+        $conn = $db->connect();
+        $sql = "UPDATE $this->table SET name = 'John Doe' WHERE id = $id";
+        $result = $conn->query($sql);
+        $conn->close();
+        return $result;
+    }
+    public function delete($id){
+        $db = new Database;
+        $conn = $db->connect();
+        $sql = "DELETE FROM $this->table WHERE id = $id";
+        $result = $conn->query($sql);
+        $conn->close();
+        return $result;
     }
 
-    public function getDetails(){
-        return "ID: $this->id, Name: $this->name, Email: $this->email";
-    }
 }
